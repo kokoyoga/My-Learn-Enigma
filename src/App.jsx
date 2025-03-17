@@ -9,9 +9,9 @@ function App() {
     <>
       {/* <Navbar /> */}
       {/* <SignUp /> */}
-      {/* <Toaster position="bottom-center" />
-      <WishList /> */}
-      <TodoCard day="Sunday" numberOfActivity={4} />
+      {/* <Toaster position="bottom-center" /> */}
+      <WishList />
+      {/* <TodoCard day="Sunday" numberOfActivity={4} /> */}
     </>
   );
 }
