@@ -1,12 +1,17 @@
-import { Input, Button } from "@heroui/react";
-import { useEffect, useState } from "react";
-import { axiosInstance } from "../lib/axios";
-import { toast } from "sonner";
+import {Input, Button} from "@heroui/react";
+import {useEffect, useState} from "react";
+import {axiosInstance} from "../lib/axios";
+import {toast} from "sonner";
+import {Link} from "react-router-dom";
+import {useSelector, useDispatch} from "react-redux";
 
 function WishList() {
   // const inputRef = useRef();
   const [wishListInput, setWishListInput] = useState("");
   const [wishListItems, setWishListItems] = useState([]);
+
+  // global state
+  const messageSelector = useSelector((state) => state.messageReducer);
 
   // mengirim data ke server dengan mentriger button add dengan post
   const AddWishList = async () => {
@@ -57,8 +62,7 @@ function WishList() {
           value={wishListInput}
           onChange={(event) => {
             setWishListInput(event.target.value);
-          }}
-        ></Input>
+          }}></Input>
         <Button onPress={AddWishList}>Add</Button>
       </div>
       <ul className="text-center list-inside list-decimal">
@@ -73,6 +77,11 @@ function WishList() {
           );
         })}
       </ul>
+
+      <div>
+        <Link to="/auth/sign-up">to signup page</Link>
+        <p>Global state : {messageSelector.message}</p>
+      </div>
     </>
   );
 }

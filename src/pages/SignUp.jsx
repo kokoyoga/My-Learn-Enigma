@@ -4,12 +4,14 @@ import {
   Card,
   CardBody,
   CardHeader,
+  CardFooter,
   Divider,
   Input,
 } from "@heroui/react";
-import { useForm, Controller } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import {useForm, Controller} from "react-hook-form";
+import {z} from "zod";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {Link} from "react-router-dom";
 
 const signUpFormSchema = z.object({
   email: z.string().email("Format email belum sesuai"),
@@ -29,7 +31,7 @@ function SignUp() {
 
   const registerUser = (data) => {
     alert(
-      `Data berhasil di submit, Email: ${data.email} | Username: ${data.username} | Password: ${data.password}`
+      `Data berhasil di submit, Email: ${data.email} | Username: ${data.username} | Password: ${data.password}`,
     );
   };
 
@@ -41,20 +43,18 @@ function SignUp() {
         <CardBody>
           <form
             onSubmit={form.handleSubmit(registerUser)}
-            className="flex flex-col gap-4"
-          >
+            className="flex flex-col gap-4">
             <Controller
               name="email"
               control={form.control}
-              render={({ field, fieldState }) => {
+              render={({field, fieldState}) => {
                 return (
                   <Input
                     {...field}
                     label="Email"
                     type="email"
                     isInvalid={Boolean(fieldState.error)}
-                    errorMessage={fieldState.error?.message}
-                  >
+                    errorMessage={fieldState.error?.message}>
                     Email
                   </Input>
                 );
@@ -63,14 +63,13 @@ function SignUp() {
             <Controller
               name="username"
               control={form.control}
-              render={({ field, fieldState }) => {
+              render={({field, fieldState}) => {
                 return (
                   <Input
                     {...field}
                     label="Username"
                     isInvalid={Boolean(fieldState.error)}
-                    errorMessage={fieldState.error?.message}
-                  >
+                    errorMessage={fieldState.error?.message}>
                     Username
                   </Input>
                 );
@@ -79,15 +78,14 @@ function SignUp() {
             <Controller
               name="password"
               control={form.control}
-              render={({ field, fieldState }) => {
+              render={({field, fieldState}) => {
                 return (
                   <Input
                     {...field}
                     label="Password"
                     type="password"
                     isInvalid={Boolean(fieldState.error)}
-                    errorMessage={fieldState.error?.message}
-                  >
+                    errorMessage={fieldState.error?.message}>
                     Password
                   </Input>
                 );
@@ -97,6 +95,9 @@ function SignUp() {
             <Button type="submit">SignUp Now!</Button>
           </form>
         </CardBody>
+        <CardFooter>
+          <Link to="/wishlist">to wishlist</Link>
+        </CardFooter>
       </Card>
     </div>
   );
