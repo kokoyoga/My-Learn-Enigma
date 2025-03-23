@@ -1,4 +1,14 @@
 {
-  "wishlist-items": [],
+  "wishlist-items": [
+    {
+      "id": "0eca",
+      "name": "oke"
+    },
+    {
+      "id": "c125",
+      "name": "oke1",
+      "age": 12
+    }
+  ],
   "users": []
 }

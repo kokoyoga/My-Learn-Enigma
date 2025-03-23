@@ -1,19 +1,47 @@
-import WishList from "./pages/WishListItems";
-import Navbar from "./components/Navbar";
-import SignUp from "./pages/SignUp";
 import {Toaster} from "sonner";
-import TodoCard from "./components/Todo-card";
 import {Link, Router, Route, Routes} from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import CounterPage from "./pages/CounterPage";
+import {lazy, Suspense} from "react";
+
+const WishList = lazy(() => import("./pages/WishListItems"));
+const SignUp = lazy(() => import("./pages/SignUp"));
+const HomePage = lazy(() => import("./pages/HomePage"));
+const CounterPage = lazy(() => import("./pages/CounterPage"));
 
 function App() {
   return (
     <Routes>
-      <Route element={<WishList />} path="/wishlist" />
-      <Route element={<SignUp />} path="/auth/sign-up" />
-      <Route element={<CounterPage />} path="/counter-page" />
-      <Route element={<HomePage />} path="/homepage/:username" />
+      <Route
+        element={
+          <Suspense fallback="Loading...">
+            <WishList />
+          </Suspense>
+        }
+        path="/wishlist"
+      />
+      <Route
+        element={
+          <Suspense fallback="Loading...">
+            <SignUp />
+          </Suspense>
+        }
+        path="/auth/sign-up"
+      />
+      <Route
+        element={
+          <Suspense fallback="Loading...">
+            <CounterPage />
+          </Suspense>
+        }
+        path="/counter-page"
+      />
+      <Route
+        element={
+          <Suspense fallback="Loading...">
+            <HomePage />
+          </Suspense>
+        }
+        path="/homepage/:username"
+      />
     </Routes>
   );
 }

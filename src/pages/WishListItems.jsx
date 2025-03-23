@@ -19,7 +19,7 @@ function WishList() {
       await axiosInstance.post("/wishlist-items", {
         name: wishListInput,
       });
-      fetchWishListItem();
+      getWishListItem();
       setWishListInput("");
       toast.success("You added a new item");
     } catch (error) {
@@ -31,7 +31,7 @@ function WishList() {
   };
 
   // ngambil data ke server
-  const fetchWishListItem = async () => {
+  const getWishListItem = async () => {
     try {
       const response = await axiosInstance.get("/wishlist-items");
       setWishListItems(response.data);
@@ -42,13 +42,13 @@ function WishList() {
 
   // agar fetchWishListItem ter trigger secara otomatis masukan ke dalam useEffect
   useEffect(() => {
-    fetchWishListItem();
+    getWishListItem();
   }, []);
 
   const deleteWishlist = async (id) => {
     try {
       await axiosInstance.delete(`/wishlist-items/${id}`);
-      fetchWishListItem(); // Refresh daftar wishlist setelah menghapus
+      getWishListItem(); // Refresh daftar wishlist setelah menghapus
       toast.success("Item deleted successfully");
     } catch (error) {
       toast.error("Failed to delete item");
@@ -80,6 +80,7 @@ function WishList() {
 
       <div>
         <Link to="/auth/sign-up">to signup page</Link>
+        <Link to="/counter-page">to counter page</Link>
         <p>Global state : {messageSelector.message}</p>
       </div>
     </>

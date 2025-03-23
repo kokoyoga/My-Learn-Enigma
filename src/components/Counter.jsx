@@ -1,6 +1,12 @@
 import {Button, Divider, input} from "@heroui/react";
-import {useState} from "react";
+import {useState, useMemo} from "react";
 import {useSelector, useDispatch} from "react-redux";
+
+// dibuat seolah-olah ini adalah function yang berat/ tidak memoized
+const doubleNumber = (num) => {
+  for (let i = 0; i < 1000000000; i++) {}
+  return num * 2;
+};
 
 function Counter() {
   // global state
@@ -31,6 +37,9 @@ function Counter() {
     setCounter(counter - 1);
   };
 
+  // cara agar function berat tidak mengganggu rendering
+  const doubleNumberValue = useMemo(() => doubleNumber(counter), [counter]);
+
   return (
     <div className="flex item-center flex-col justify-center gap-5">
       <h1 className="text-center">Local state</h1>
@@ -41,6 +50,7 @@ function Counter() {
       <Button onPress={addButton} color="secondary">
         add
       </Button>
+      <p className="text-center">{doubleNumberValue}</p>
       <Divider />
       <h1 className="text-center">Global state</h1>
       <Button onPress={handleClickDecrement} color="primary">
